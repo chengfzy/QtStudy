@@ -57,3 +57,4 @@ include_directories(common)
 # Example
 add_subdirectory(Eg01_HelloWorld)
 add_subdirectory(Eg02_OpenGLWindow)
+add_subdirectory(Eg03_OpenGL3DRendering)
