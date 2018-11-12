@@ -39,9 +39,9 @@ message(STATUS "Boost headers: ${Boost_INCLUDE_DIR}")
 message(STATUS "Boost libs: ${Boost_LIBRARIES}")
 
 # library: Qt
-#set(CMAKE_PREFIX_PATH "/home/jeffery/Programs/Qt5.10.1/5.10.1/gcc_64")
+#set(CMAKE_PREFIX_PATH "/home/jeffery/Qt5.11.2/5.11.2/gcc_64/lib/cmake")
+#find_package(Qt5 5.11 COMPONENTS Core Widgets Gui REQUIRED)
 find_package(Qt5 COMPONENTS Core Widgets Gui REQUIRED)
-
 
 # libraries: others
 include_directories(${Boost_INCLUDE_DIRS})
