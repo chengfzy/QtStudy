@@ -12,7 +12,6 @@ list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 # find and add Qt path from Home directory
 foreach (r $ENV{HOME}/Programs $ENV{HOME})
     file(GLOB FOLDER RELATIVE ${r} ${r}/*)
-    #    message(STATUS "folders: ${FOLDER}")
     foreach (f ${FOLDER})
         if (IS_DIRECTORY ${r}/${f} AND ${f} MATCHES "Qt*")
             string(SUBSTRING ${f} 2 -1 QtVersion)
