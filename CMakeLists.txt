@@ -10,12 +10,12 @@ list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 # Libraries
 ###############################################################################
 # find and add Qt path from Home directory
-foreach (r $ENV{HOME}/Programs $ENV{HOME})
+foreach (r $ENV{HOME}/Programs $ENV{HOME} /opt)
     file(GLOB FOLDER RELATIVE ${r} ${r}/*)
     foreach (f ${FOLDER})
         if (IS_DIRECTORY ${r}/${f} AND ${f} MATCHES "Qt*")
             string(SUBSTRING ${f} 2 -1 QtVersion)
-            message(STATUS "Found Qtfolder: ${r}/${f}, Version: ${QtVersion}")
+            message(STATUS "Found QtFolder: ${r}/${f}, Version: ${QtVersion}")
             set(CMAKE_PREFIX_PATH "${r}/${f}/${QtVersion}/gcc_64/lib/cmake")
             break()
         endif ()
@@ -27,8 +27,7 @@ find_package(Gflags REQUIRED)                                   # gflags
 find_package(Glog REQUIRED)                                     # glog
 find_package(Boost COMPONENTS filesystem date_time REQUIRED)    # boost
 find_package(Eigen3)                                            # Eigen
-find_package(OpenCV 4)                                          # OpenCV
-find_package(Qt5 COMPONENTS Core Widgets Gui REQUIRED)          # Qt
+find_package(Qt5 COMPONENTS Core Widgets Gui Network REQUIRED)  # Qt
 
 # dependency include directories and dependency libraries
 list(APPEND PRIVATE_DEPEND_INCLUDES
@@ -36,13 +35,12 @@ list(APPEND PRIVATE_DEPEND_INCLUDES
         ${GLOG_INCLUDE_DIRS}
         ${Boost_INCLUDE_DIRS}
         ${EIGEN3_INCLUDE_DIRS}
-        ${OpenCV_INCLUDE_DIRS}
         )
 list(APPEND PRIVATE_DEPEND_LIBS
         ${GFLAGS_LIBRARIES}
         ${GLOG_LIBRARIES}
         ${Boost_LIBRARIES}
-        Qt5::Core Qt5::Widgets Qt5::Gui
+        Qt5::Core Qt5::Widgets Qt5::Gui Qt5::Network
         )
 
 
@@ -78,3 +76,5 @@ add_subdirectory(common)
 add_subdirectory(Eg01_HelloWorld)
 add_subdirectory(Eg02_OpenGLWindow)
 add_subdirectory(Eg03_OpenGL3DRendering)
+add_subdirectory(Eg04_TcpServer)
+add_subdirectory(Eg05_TcpAsyncClient)

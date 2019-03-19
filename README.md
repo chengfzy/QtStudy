@@ -12,3 +12,9 @@ Some Study Code about Qt using CMake
 1. Eg03_OpenGL3DRendering   \
     3D Redering using OpenGLWidget. \
     Ref: http://www.trentreed.net/blog/qt5-opengl-part-2-3d-rendering/
+1. Eg04_TcpServer   \
+    TCP server. \
+    Ref: Qt Example.
+1. Eg05_TcpAsyncClient   \
+    Asynchronous approach of TCP Client. \
+    Ref: Qt Example.
