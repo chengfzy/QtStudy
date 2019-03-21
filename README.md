@@ -18,3 +18,6 @@ Some Study Code about Qt using CMake
 1. Eg05_TcpAsyncClient   \
     Asynchronous approach of TCP Client. \
     Ref: Qt Example.
+1. Eg06_TcpSyncClient   \
+    Synchronous approach of TCP Client. \
+    Ref: Qt Example.
