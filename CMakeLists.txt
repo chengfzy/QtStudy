@@ -59,7 +59,7 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 # Qt build setting
-set(CMAKE_INCLUDE_CURRENT_DIR ON)   # find includes in corresponding build directories
+#set(CMAKE_INCLUDE_CURRENT_DIR ON)   # find includes in corresponding build directories
 set(CMAKE_AUTOMOC ON)   # instruct cmake to run moc automacically when needed
 set(CMAKE_AUTOUIC ON)   # create code from a list of Qt designer ui files
 set(CMAKE_AUTORCC ON)   # create code from a resource files
@@ -78,3 +78,4 @@ add_subdirectory(Eg02_OpenGLWindow)
 add_subdirectory(Eg03_OpenGL3DRendering)
 add_subdirectory(Eg04_TcpServer)
 add_subdirectory(Eg05_TcpAsyncClient)
+add_subdirectory(Eg06_TcpSyncClient)

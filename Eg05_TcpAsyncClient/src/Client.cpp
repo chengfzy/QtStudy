@@ -1,6 +1,6 @@
 #include "Client.h"
 
-Client::Client(QWidget* parent)
+BlockingClient::BlockingClient(QWidget* parent)
     : QDialog(parent),
       hostCombo_(new QComboBox),
       portLineEdit_(new QLineEdit),
@@ -19,7 +19,7 @@ Client::Client(QWidget* parent)
         }
     }
 
-    // find out IP address of thie machine
+    // find out IP address of this machine
     QList<QHostAddress> ipAddressList = QNetworkInterface::allAddresses();
     // add non-localhost addresses
     for (const auto& ip : ipAddressList) {
@@ -65,16 +65,16 @@ Client::Client(QWidget* parent)
     in_.setVersion(QDataStream::Qt_5_12);
 
     // connect
-    connect(hostCombo_, &QComboBox::editTextChanged, this, &Client::enableGetFortuneButton);
-    connect(portLineEdit_, &QLineEdit::textChanged, this, &Client::enableGetFortuneButton);
-    connect(getFortuneButton_, &QAbstractButton::clicked, this, &Client::requestNewFortune);
+    connect(hostCombo_, &QComboBox::editTextChanged, this, &BlockingClient::enableGetFortuneButton);
+    connect(portLineEdit_, &QLineEdit::textChanged, this, &BlockingClient::enableGetFortuneButton);
+    connect(getFortuneButton_, &QAbstractButton::clicked, this, &BlockingClient::requestNewFortune);
     connect(quitButton, &QAbstractButton::clicked, this, &QWidget::close);
-    connect(tcpSocket_, &QIODevice::readyRead, this, &Client::readFortune);
+    connect(tcpSocket_, &QIODevice::readyRead, this, &BlockingClient::readFortune);
     connect(tcpSocket_, QOverload<QAbstractSocket::SocketError>::of(&QAbstractSocket::error), this,
-            &Client::displayError);
+            &BlockingClient::displayError);
 }
 
-void Client::requestNewFortune() {
+void BlockingClient::requestNewFortune() {
     getFortuneButton_->setEnabled(false);
     // because we allow the user to click Get Fortune before the previous connection finished closing, we start off by
     // aborting the previous connection by calling QTcpSocket::abort(). On an unconnected socket, this function does
@@ -83,7 +83,7 @@ void Client::requestNewFortune() {
     tcpSocket_->connectToHost(hostCombo_->currentText(), portLineEdit_->text().toInt());
 }
 
-void Client::readFortune() {
+void BlockingClient::readFortune() {
     in_.startTransaction();
 
     QString nextFortune;
@@ -94,7 +94,7 @@ void Client::readFortune() {
     }
 
     if (nextFortune == currentFortune_) {
-        QTimer::singleShot(0, this, &Client::requestNewFortune);
+        QTimer::singleShot(0, this, &BlockingClient::requestNewFortune);
         return;
     }
 
@@ -103,7 +103,7 @@ void Client::readFortune() {
     getFortuneButton_->setEnabled(true);
 }
 
-void Client::displayError(QAbstractSocket::SocketError socketError) {
+void BlockingClient::displayError(QAbstractSocket::SocketError socketError) {
     switch (socketError) {
         case QAbstractSocket::RemoteHostClosedError:
             break;
@@ -124,6 +124,6 @@ void Client::displayError(QAbstractSocket::SocketError socketError) {
     getFortuneButton_->setEnabled(true);
 }
 
-void Client::enableGetFortuneButton() {
+void BlockingClient::enableGetFortuneButton() {
     getFortuneButton_->setEnabled(!hostCombo_->currentText().isEmpty() && !portLineEdit_->text().isEmpty());
 }

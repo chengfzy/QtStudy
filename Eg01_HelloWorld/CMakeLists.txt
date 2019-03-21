@@ -1,7 +1,6 @@
 project(Eg01_HelloWorld)
 
-file(GLOB_RECURSE FILE_SRCS ./*.*)
-add_executable(${PROJECT_NAME} ${FILE_SRCS})
+add_executable(${PROJECT_NAME} ./main.cpp)
 target_include_directories(${PROJECT_NAME}
         PRIVATE
         ${PRIVATE_DEPEND_INCLUDES})

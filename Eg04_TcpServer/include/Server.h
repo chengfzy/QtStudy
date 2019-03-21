@@ -3,6 +3,8 @@
 #include "QtWidgets"
 
 class Server : public QDialog {
+    Q_OBJECT
+
   public:
     explicit Server(QWidget* parent = nullptr);
 

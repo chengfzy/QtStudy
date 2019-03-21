@@ -53,7 +53,7 @@ void Server::sessionOpened() {
     if (ipAddress.isEmpty()) {
         ipAddress = QHostAddress(QHostAddress::LocalHost).toString();
     }
-    statusLabel_->setText(tr("The server is running on\n\nIP: %1\nport: %2\n\nRun the fortune Client example now.")
+    statusLabel_->setText(tr("The server is running on\n\nIP: %1\nport: %2\n\nRun the fortune BlockingClient example now.")
                               .arg(ipAddress)
                               .arg(tcpServer_->serverPort()));
 }

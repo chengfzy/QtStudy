@@ -1,9 +1,9 @@
 #include <iostream>
-#include "Client.h"
+#include "BlockingClient.h"
 
 int main(int argc, char* argv[]) {
     QApplication app(argc, argv);
-    QApplication::setApplicationDisplayName("Fortune Asynchronous Client");
+    QApplication::setApplicationDisplayName("Fortune Synchronous BlockingClient");
     BlockingClient server;
     server.show();
 
