@@ -1,4 +1,4 @@
-project(Eg08_UdpReceiver)
+project(Eg08_UdpBroadcastReceiver)
 
 # should add include for automoc
 file(GLOB_RECURSE FILE_INCLUDES ./include/*.*)

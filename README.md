@@ -27,4 +27,10 @@ Some Study Code about Qt using CMake
 1. Eg08_UdpReceiver \
     Broadcast receiver using UDP. \
     Ref: Qt Example.
+1. Eg09_UdpMulticastSender \
+    Multicast sender using UDP. \
+    Ref: Qt Example.
+1. Eg10_UdpMulticastReceiver \
+    Multicast receiver using UDP. \
+    Ref: Qt Example.
     
