@@ -1,9 +1,8 @@
-project(Eg02_OpenGLWindow)
+project(Eg10_UdpMulticastSender)
 
 # should add include for automoc
 file(GLOB_RECURSE FILE_INCLUDES ./include/*.*)
 file(GLOB_RECURSE FILE_SRCS ./src/*.*)
-file(GLOB_RECURSE FILE_RESS ./res/*.qrc)
 add_executable(${PROJECT_NAME} ${FILE_INCLUDES} ${FILE_SRCS})
 target_include_directories(${PROJECT_NAME}
         PRIVATE

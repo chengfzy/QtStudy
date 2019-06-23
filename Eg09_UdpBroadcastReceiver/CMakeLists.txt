@@ -1,4 +1,4 @@
-project(Eg06_TcpSyncClient)
+project(Eg09_UdpBroadcastReceiver)
 
 # should add include for automoc
 file(GLOB_RECURSE FILE_INCLUDES ./include/*.*)
