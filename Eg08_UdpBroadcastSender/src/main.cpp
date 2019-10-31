@@ -1,4 +1,3 @@
-#include <iostream>
 #include "Sender.h"
 
 int main(int argc, char* argv[]) {
