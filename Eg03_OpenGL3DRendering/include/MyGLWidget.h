@@ -1,9 +1,9 @@
 #pragma once
-#include "QOpenGLBuffer"
-#include "QOpenGLFunctions"
-#include "QOpenGLShaderProgram"
-#include "QOpenGLVertexArrayObject"
-#include "QOpenGLWidget"
+#include <QOpenGLBuffer>
+#include <QOpenGLFunctions>
+#include <QOpenGLShaderProgram>
+#include <QOpenGLVertexArrayObject>
+#include <QOpenGLWidget>
 #include "Transform3D.h"
 
 class MyGLWidget : public QOpenGLWidget, protected QOpenGLFunctions {

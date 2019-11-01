@@ -1,5 +1,5 @@
 #include "MyGLWidget.h"
-#include "QDebug"
+#include <QDebug>
 #include "Vertex.h"
 
 // create a colored triangle

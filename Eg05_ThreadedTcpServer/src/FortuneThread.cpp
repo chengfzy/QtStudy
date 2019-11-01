@@ -1,5 +1,5 @@
 #include "FortuneThread.h"
-#include "QtNetwork"
+#include <QtNetwork>
 
 FortuneThread::FortuneThread(int socketDescriptor, const QString& fortune, QObject* parent)
     : QThread(parent), socketDescriptors_(socketDescriptor), text_(fortune) {}

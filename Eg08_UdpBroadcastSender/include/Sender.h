@@ -1,6 +1,6 @@
 #pragma once
-#include "QtNetwork"
-#include "QtWidgets"
+#include <QtNetwork>
+#include <QtWidgets>
 
 class Sender : public QWidget {
     Q_OBJECT

@@ -35,3 +35,7 @@
 # clion
 /.idea
 cmake-build-*/
+build*/
+
+# data
+data/
