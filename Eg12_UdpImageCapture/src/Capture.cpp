@@ -46,7 +46,7 @@ void Capture::setupUI() {
 
     // title and size
     setWindowTitle("Image Capture");
-    setMinimumSize(300, 200);
+    setMinimumSize(400, 300);
 }
 
 // control(start/stop) capture
@@ -56,6 +56,8 @@ void Capture::controlCapture() {
         timer_.start(1000);
     } else {
         timer_.stop();
+        // send empty image before stop
+        emit newImageGot(QImage());
         controlButton_->setText("Start");
     }
 }
@@ -66,7 +68,7 @@ void Capture::capture() {
     QImage image("../../data/img.png");
     QPainter painter(&image);
     QFont font = painter.font();
-    font.setPointSize(20);
+    font.setPointSize(30);
     font.setBold(true);
     painter.setFont(font);
     painter.drawText(QPoint(50, 50), tr("Image #%1").arg(imageNo_));
@@ -85,25 +87,24 @@ void Capture::processImage(const QImage& image) {
     // compress to JPG
     QByteArray imageByte;
     QBuffer imageBuffer(&imageByte);
-    image.save(&imageBuffer, "JPG", 75);
-    // compress and to base64
-    QByteArray base64Byte = qCompress(imageByte).toBase64();
+    image.save(&imageBuffer, "JPEG", 30);
 
     // add header to send bytes
-    QString header = tr("START %1").arg(quint32(base64Byte.size()));
+    QString header = tr("ImageHeader %1").arg(quint32(imageByte.size()));
     QByteArray sendBytes;
     QDataStream dataStream(&sendBytes, QIODevice::WriteOnly);
     dataStream.setVersion(QDataStream::Qt_5_12);
     dataStream << header;
-    dataStream << base64Byte;
-    cout << format("Send Image [{}]: image size  = {}, send size = {}", imageNo_, base64Byte.size(), sendBytes.size())
+    dataStream << imageByte;
+    cout << format("Send Image [{}]: raw image size = {} Mb, send image size = {}, send size = {}", imageNo_,
+                   image.sizeInBytes() / 1024. / 1024., imageByte.size(), sendBytes.size())
          << endl;
 
     // split it and send using broad cast
-    static const int kMaxLen{1024 * 10};  // max size = 10k
+    static const int kMaxLen{10240};  // max size = 10k
     for (int i = 0; i < sendBytes.size(); i += kMaxLen) {
         QByteArray bytes = sendBytes.mid(i, kMaxLen);
-        if (-1 == sender_->writeDatagram(bytes.data(), bytes.size(), QHostAddress::Broadcast, sendPort_)) {
+        if (-1 == sender_->writeDatagram(bytes.data(), bytes.size(), sendAddress_, sendPort_)) {
             cout << format("Error: {}: {}", sender_->error(), sender_->errorString().toStdString()) << endl;
         }
     }
