@@ -1,5 +1,5 @@
 #include "FortuneThread.h"
-#include "QtNetwork"
+#include <QtNetwork>
 
 FortuneThread::FortuneThread(QObject* parent) : QThread(parent), quit_(false) {}
 

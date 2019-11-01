@@ -1,7 +1,7 @@
 #pragma once
-#include "QMatrix4x4"
-#include "QQuaternion"
-#include "QVector3D"
+#include <QMatrix4x4>
+#include <QQuaternion>
+#include <QVector3D>
 
 class Transform3D {
    public:

@@ -1,5 +1,5 @@
 #include "MainWidget.h"
-#include "QtNetwork"
+#include <QtNetwork>
 
 MainWidget::MainWidget(QWidget* parent) : QWidget(parent) {
     // start TCP listen

@@ -1,6 +1,6 @@
 #pragma once
-#include "QTcpSocket"
-#include "QThread"
+#include <QTcpSocket>
+#include <QThread>
 
 class FortuneThread : public QThread {
     Q_OBJECT

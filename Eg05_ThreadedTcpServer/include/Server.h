@@ -1,6 +1,6 @@
 #pragma once
-#include "QStringList"
-#include "QTcpServer"
+#include <QStringList>
+#include <QTcpServer>
 
 class Server : public QTcpServer {
     Q_OBJECT

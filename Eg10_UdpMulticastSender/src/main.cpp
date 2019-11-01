@@ -1,4 +1,4 @@
-#include "QApplication"
+#include <QApplication>
 #include "Sender.h"
 
 int main(int argc, char* argv[]) {

@@ -1,6 +1,6 @@
 #include "Server.h"
 #include "FortuneThread.h"
-#include "QRandomGenerator"
+#include <QRandomGenerator>
 
 Server::Server(QObject* parent) : QTcpServer(parent) {
     fortunes_ << tr("You've been leading a dog's life. Stay off the furniture.")

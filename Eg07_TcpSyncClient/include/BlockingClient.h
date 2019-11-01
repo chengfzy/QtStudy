@@ -1,7 +1,7 @@
 #pragma once
 #include "FortuneThread.h"
-#include "QtNetwork"
-#include "QtWidgets"
+#include <QtNetwork>
+#include <QtWidgets>
 
 class BlockingClient : public QWidget {
   public:

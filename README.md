@@ -10,7 +10,7 @@ Some Study Code about Qt using CMake
     Basic usage using QOpenGLWidget. \
     Ref: http://www.trentreed.net/blog/qt5-opengl-part-1-basic-rendering
 1. Eg03_OpenGL3DRendering   \
-    3D Redering using OpenGLWidget. \
+    3D Rendering using OpenGLWidget. \
     Ref: http://www.trentreed.net/blog/qt5-opengl-part-2-3d-rendering/
 1. Eg04_TcpServer   \
     TCP server. \
@@ -36,4 +36,8 @@ Some Study Code about Qt using CMake
 1. Eg11_UdpMulticastReceiver \
     Multicast receiver using UDP. \
     Ref: Qt Example.
-    
+1. Eg12_UdpImageCapture \
+    Capture image and send it to Processor using UDP, the Processor receive the image, process it and send result to
+    Capture using UDP, the Capture receive processed result and show it.
+1. Eg13_UdpImageProcessor   \
+    Ref Eg12_UdpImageCapture.

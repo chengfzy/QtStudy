@@ -1,7 +1,7 @@
 #pragma once
-#include "QMutex"
-#include "QThread"
-#include "QWaitCondition"
+#include <QMutex>
+#include <QThread>
+#include <QWaitCondition>
 
 class FortuneThread : public QThread {
     Q_OBJECT
