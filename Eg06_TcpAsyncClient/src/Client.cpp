@@ -70,8 +70,7 @@ BlockingClient::BlockingClient(QWidget* parent)
     connect(getFortuneButton_, &QAbstractButton::clicked, this, &BlockingClient::requestNewFortune);
     connect(quitButton, &QAbstractButton::clicked, this, &QWidget::close);
     connect(tcpSocket_, &QIODevice::readyRead, this, &BlockingClient::readFortune);
-    connect(tcpSocket_, QOverload<QAbstractSocket::SocketError>::of(&QAbstractSocket::error), this,
-            &BlockingClient::displayError);
+    connect(tcpSocket_, &QAbstractSocket::errorOccurred, this, &BlockingClient::displayError);
 }
 
 void BlockingClient::requestNewFortune() {
