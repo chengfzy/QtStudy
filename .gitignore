@@ -31,11 +31,12 @@
 *.out
 *.app
 
-
 # clion
 /.idea
 cmake-build-*/
 build*/
+.vscode*/
+.history/
 
 # data
 data/

@@ -41,3 +41,8 @@ Some Study Code about Qt using CMake
     Capture using UDP, the Capture receive processed result and show it.
 1. Eg13_UdpImageProcessor   \
     Ref Eg12_UdpImageCapture.
+1. Eg14_CustomModeView \
+    Custom model view using Qt.
+    Ref:
+    - https://www.devbean.net/2013/05/qt-study-road-2-custom-readonly-model/
+    - https://www.devbean.net/2013/05/qt-study-road-2-custom-editable-model/
