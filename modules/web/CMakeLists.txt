@@ -1,0 +1,11 @@
+# web related
+add_subdirectory(Web01_TcpServer)
+add_subdirectory(Web02_ThreadedTcpServer)
+add_subdirectory(Web03_TcpAsyncClient)
+add_subdirectory(Web04_TcpSyncClient)
+add_subdirectory(Web05_UdpBroadcastSender)
+add_subdirectory(Web05_UdpBroadcastReceiver)
+add_subdirectory(Web07_UdpMulticastSender)
+add_subdirectory(Web08_UdpMulticastReceiver)
+add_subdirectory(Web09_UdpImageCapture)
+add_subdirectory(Web10_UdpImageProcessor)

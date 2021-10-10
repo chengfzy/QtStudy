@@ -82,27 +82,5 @@ set(CMAKE_AUTORCC ON)   # create code from a resource files
 ###############################################################################
 # Project
 ###############################################################################
-# add common module
-set(PRJ_COMMON common)
-add_subdirectory(common)
-# project include and libs
-list(APPEND DEPEND_INCLUDES
-    ${CMAKE_CURRENT_SOURCE_DIR}/common/include
-)
-list(APPEND DEPEND_LIBS ${PRJ_COMMON})
-
-# add projects
-add_subdirectory(Eg01_HelloWorld)
-add_subdirectory(Eg02_OpenGLWindow)
-add_subdirectory(Eg03_OpenGL3DRendering)
-add_subdirectory(Eg04_TcpServer)
-add_subdirectory(Eg05_ThreadedTcpServer)
-add_subdirectory(Eg06_TcpAsyncClient)
-add_subdirectory(Eg07_TcpSyncClient)
-add_subdirectory(Eg08_UdpBroadcastSender)
-add_subdirectory(Eg09_UdpBroadcastReceiver)
-add_subdirectory(Eg10_UdpMulticastSender)
-add_subdirectory(Eg11_UdpMulticastReceiver)
-add_subdirectory(Eg12_UdpImageCapture)
-add_subdirectory(Eg13_UdpImageProcessor)
-add_subdirectory(Eg14_CustomModeView)
+# add modules
+add_subdirectory(modules)

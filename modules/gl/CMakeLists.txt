@@ -1,0 +1,3 @@
+# OpenGL related projects
+add_subdirectory(Gl01_OpenGLWindow)
+add_subdirectory(Gl02_OpenGL3DRendering)
