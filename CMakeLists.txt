@@ -89,7 +89,7 @@ list(APPEND DEPEND_INCLUDES
 add_subdirectory(common)
 add_subdirectory(Eg01_HelloWorld)
 add_subdirectory(Eg02_OpenGLWindow)
-# add_subdirectory(Eg03_OpenGL3DRendering)
+add_subdirectory(Eg03_OpenGL3DRendering)
 add_subdirectory(Eg04_TcpServer)
 add_subdirectory(Eg05_ThreadedTcpServer)
 add_subdirectory(Eg06_TcpAsyncClient)

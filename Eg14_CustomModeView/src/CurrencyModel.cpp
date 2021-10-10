@@ -57,4 +57,16 @@ bool CurrencyModel::setData(const QModelIndex& index, const QVariant& value, int
     return false;
 }
 
-QString CurrencyModel::currencyAt(int offset) const { return (currencyMap_.begin() + offset).key(); }
+QString CurrencyModel::currencyAt(int offset) const {
+    auto it = currencyMap_.begin();
+    if (offset > 0)
+        while (offset--) {
+            ++it;
+        }
+    else {
+        while (offset++) {
+            --it;
+        }
+    }
+    return it.key();
+}
