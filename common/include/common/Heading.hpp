@@ -9,6 +9,7 @@ namespace common {
  * @brief Heading type
  */
 enum class HeadingType {
+    Title,
     Section,
     SubSection,
     Paragraph,
@@ -24,9 +25,9 @@ inline bool defaultBreakLine(HeadingType type) { return type != HeadingType::Par
 /**
  * @brief Heading to print or show some formatted text
  * @tparam Type     Heading type
- * @tparam ParLen   Print length for paragraph type, and the length of section and subsection will be 1.5 * ParLen
+ * @tparam SecLen   Print length for section and subsection type, and the length of paragraph will be SecLen / 1.5
  */
-template <HeadingType Type = HeadingType::Section, unsigned short ParLen = 80>
+template <HeadingType Type = HeadingType::Section, unsigned short SecLen = 100>
 class Heading {
   public:
     /**
@@ -50,13 +51,40 @@ class Heading {
 
   public:
     /**
-     * @brief Print heading
+     * @brief Print heading for Title
      * @param os    Output stream
      * @param info  Heading info
      * @return Output stream
      */
-    template <HeadingType Type_, unsigned short ParLen_>
-    friend std::ostream& operator<<(std::ostream& os, const Heading<Type_, ParLen_>& info);
+    template <unsigned short SecLen_>
+    friend std::ostream& operator<<(std::ostream& os, const Heading<HeadingType::Title, SecLen_>& info);
+
+    /**
+     * @brief Print heading for Section
+     * @param os    Output stream
+     * @param info  Heading info
+     * @return Output stream
+     */
+    template <unsigned short SecLen_>
+    friend std::ostream& operator<<(std::ostream& os, const Heading<HeadingType::Section, SecLen_>& info);
+
+    /**
+     * @brief Print heading for SubSection
+     * @param os    Output stream
+     * @param info  Heading info
+     * @return Output stream
+     */
+    template <unsigned short SecLen_>
+    friend std::ostream& operator<<(std::ostream& os, const Heading<HeadingType::SubSection, SecLen_>& info);
+
+    /**
+     * @brief Print heading for Paragraph
+     * @param os    Output stream
+     * @param info  Heading info
+     * @return Output stream
+     */
+    template <unsigned short SecLen_>
+    friend std::ostream& operator<<(std::ostream& os, const Heading<HeadingType::Paragraph, SecLen_>& info);
 
   private:
     std::string text_;  // heading text
@@ -64,6 +92,7 @@ class Heading {
 };
 
 /**************************************** Type Definition ****************************************/
+using Title = Heading<HeadingType::Title>;
 using Section = Heading<HeadingType::Section>;
 using SubSection = Heading<HeadingType::SubSection>;
 using Paragraph = Heading<HeadingType::Paragraph>;

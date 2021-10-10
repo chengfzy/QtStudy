@@ -1,6 +1,7 @@
-cmake_minimum_required(VERSION 3.2)
+cmake_minimum_required(VERSION 3.12)
 project(QtStudy)
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # cmake modules
 list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
@@ -77,16 +78,20 @@ set(CMAKE_AUTOMOC ON)   # instruct cmake to run moc automacically when needed
 set(CMAKE_AUTOUIC ON)   # create code from a list of Qt designer ui files
 set(CMAKE_AUTORCC ON)   # create code from a resource files
 
-# project name
-set(PRJ_COMMON common)
 
-# project include
+###############################################################################
+# Project
+###############################################################################
+# add common module
+set(PRJ_COMMON common)
+add_subdirectory(common)
+# project include and libs
 list(APPEND DEPEND_INCLUDES
     ${CMAKE_CURRENT_SOURCE_DIR}/common/include
 )
+list(APPEND DEPEND_LIBS ${PRJ_COMMON})
 
-# add project directory
-add_subdirectory(common)
+# add projects
 add_subdirectory(Eg01_HelloWorld)
 add_subdirectory(Eg02_OpenGLWindow)
 add_subdirectory(Eg03_OpenGL3DRendering)
