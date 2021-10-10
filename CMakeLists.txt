@@ -39,21 +39,16 @@ FindAddQtPath(${QtFolder})
 find_package(Gflags REQUIRED)                                   # gflags
 find_package(Glog REQUIRED)                                     # glog
 find_package(fmt REQUIRED)                                      # fmt
-find_package(Boost COMPONENTS filesystem date_time REQUIRED)    # boost
-find_package(Eigen3)                                            # Eigen
 find_package(Qt6 COMPONENTS Core Widgets Gui OpenGL OpenGLWidgets Network REQUIRED)  # Qt
 
 # dependency include directories and dependency libraries
 list(APPEND DEPEND_INCLUDES
     ${GFLAGS_INCLUDE_DIRS}
     ${GLOG_INCLUDE_DIRS}
-    ${Boost_INCLUDE_DIRS}
-    ${EIGEN3_INCLUDE_DIRS}
 )
 list(APPEND DEPEND_LIBS
     ${GFLAGS_LIBRARIES}
     ${GLOG_LIBRARIES}
-    ${Boost_LIBRARIES}
     fmt::fmt-header-only
     Qt::Core Qt::Widgets Qt::Gui Qt::OpenGL Qt::OpenGLWidgets Qt::Network
 )
