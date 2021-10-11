@@ -19,6 +19,9 @@ Some Study Code about Qt using CMake
 1. Gl02_OpenGL3DRendering   \
     3D Rendering using OpenGLWidget. \
     Ref: http://www.trentreed.net/blog/qt5-opengl-part-2-3d-rendering/
+1. Gl03_2DPainting   \
+    2D painting example, draw 2D with QWidget and QOpenGLWidget. \
+    Ref: Qt OpenGL Example, 2D Painting Example
 
 ### Web
 1. Web01_TcpServer   \
