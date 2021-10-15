@@ -39,7 +39,6 @@ FindAddQtPath(${QtFolder})
 find_package(Gflags REQUIRED)                                   # gflags
 find_package(Glog REQUIRED)                                     # glog
 find_package(fmt REQUIRED)                                      # fmt
-find_package(Qt6 COMPONENTS Core Widgets Gui OpenGL OpenGLWidgets Network REQUIRED)  # Qt
 
 # dependency include directories and dependency libraries
 list(APPEND DEPEND_INCLUDES
@@ -50,9 +49,16 @@ list(APPEND DEPEND_LIBS
     ${GFLAGS_LIBRARIES}
     ${GLOG_LIBRARIES}
     fmt::fmt-header-only
-    Qt::Core Qt::Widgets Qt::Gui Qt::OpenGL Qt::OpenGLWidgets Qt::Network
 )
 
+# Qt
+find_package(Qt6 COMPONENTS Core Widgets Gui OpenGL OpenGLWidgets Network)
+if(Qt6_FOUND)
+    list(APPEND DEPEND_LIBS Qt::Core Qt::Widgets Qt::Gui Qt::OpenGL Qt::OpenGLWidgets Qt::Network)
+else()
+    find_package(Qt5 COMPONENTS Core Widgets Gui OpenGL Network REQUIRED)
+    list(APPEND DEPEND_LIBS Qt::Core Qt::Widgets Qt::Gui Qt::OpenGL Qt::Network)
+endif()
 
 ###############################################################################
 # Project Setting
