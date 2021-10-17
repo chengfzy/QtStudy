@@ -12,6 +12,12 @@ Some Study Code about Qt using CMake
     Ref:
     - https://www.devbean.net/2013/05/qt-study-road-2-custom-readonly-model/
     - https://www.devbean.net/2013/05/qt-study-road-2-custom-editable-model/
+
+
+### Quick
+1. Quick01_QmlBasic \
+    Some basic qml example, use` /opt/Qt/6.2.0/gcc_64/bin/qml ./modules/quick/Quick01_QmlBasic/Main.qml` to show the UI result.
+
 ### OpenGL
 1. Gl01_OpenGLWindow    \
     Basic usage using QOpenGLWidget. \
