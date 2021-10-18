@@ -53,12 +53,12 @@ list(APPEND DEPEND_LIBS
 
 # Qt
 find_package(QT NAMES Qt6 Qt5 COMPONENTS Core)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Widgets Gui Quick OpenGL OpenGLWidgets Network)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Widgets Gui Qml Quick OpenGL OpenGLWidgets Network)
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
-    list(APPEND DEPEND_LIBS Qt::Core Qt::Widgets Qt::Gui Qt::Quick Qt::OpenGL Qt::OpenGLWidgets Qt::Network)
+    list(APPEND DEPEND_LIBS Qt::Core Qt::Widgets Qt::Qml Qt::Quick Qt::OpenGL Qt::OpenGLWidgets Qt::Network)
 else()
-    find_package(Qt5 COMPONENTS Core Widgets Gui Quick OpenGL Network REQUIRED)
-    list(APPEND DEPEND_LIBS Qt::Core Qt::Widgets Qt::Gui Qt::Quick Qt::OpenGL Qt::Network)
+    find_package(Qt5 COMPONENTS Core Widgets Gui Qml Quick OpenGL Network REQUIRED)
+    list(APPEND DEPEND_LIBS Qt::Core Qt::Widgets Qt::Gui Qt::Qml Qt::Quick Qt::OpenGL Qt::Network)
 endif()
 
 ###############################################################################

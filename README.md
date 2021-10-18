@@ -17,6 +17,9 @@ Some Study Code about Qt using CMake
 ### Quick
 1. Quick01_QmlBasic \
     Some basic qml example, use` /opt/Qt/6.2.0/gcc_64/bin/qml ./modules/quick/Quick01_QmlBasic/Main.qml` to show the UI result.
+1. Quick02_AddType \
+    How to add a new object type to QML.\
+    Ref: Qt help/Qt QML Examples/Extending QML - Adding Types Example
 
 ### OpenGL
 1. Gl01_OpenGLWindow    \
