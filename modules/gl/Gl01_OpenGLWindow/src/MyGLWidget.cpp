@@ -60,7 +60,6 @@ void MyGLWidget::paintGL() {
     program_->release();
 }
 
-
 void MyGLWidget::teardownGL() {
     object_.destroy();
     vertex_.destroy();
