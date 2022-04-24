@@ -12,6 +12,7 @@ class MainWidget : public QWidget {
     void connectMarkers();
     void disconnectMarkers();
 
+    void detachLegend();
     void handleMarkerClicked();
 
   private:

@@ -5,9 +5,14 @@ MainWidget::MainWidget(QWidget* parent) : QWidget(parent) {
     chart_ = new QChart();
     chartView_ = new QChartView(chart_, this);
 
+    // button to detach legend from chart
+    auto detachButton = new QPushButton("Toggle Detach Legend");
+    connect(detachButton, &QPushButton::clicked, this, &MainWidget::detachLegend);
+
     // create layout for grid and detached legend
-    auto mainLayout = new QHBoxLayout();
+    auto mainLayout = new QVBoxLayout();
     mainLayout->addWidget(chartView_);
+    mainLayout->addWidget(detachButton);
     setLayout(mainLayout);
 
     // add series
@@ -91,6 +96,24 @@ void MainWidget::disconnectMarkers() {
     for (auto& m : markers) {
         QObject::disconnect(m, &QLegendMarker::clicked, this, &MainWidget::handleMarkerClicked);
     }
+}
+
+void MainWidget::detachLegend() {
+    auto legend = chart_->legend();
+    if (legend->isAttachedToChart()) {
+        legend->detachFromChart();
+        chart_->legend()->setBackgroundVisible(true);
+        // chart_->legend()->setBrush(QBrush(QColor(128, 128, 128, 128)));
+        chart_->legend()->setPen(QPen(QColor(192, 192, 192, 192)));
+        chart_->legend()->setAlignment(Qt::AlignLeft);
+        chart_->legend()->setGeometry(400, 60, 80, 130);
+        chart_->legend()->update();
+    } else {
+        legend->attachToChart();
+        chart_->legend()->setAlignment(Qt::AlignBottom);
+        chart_->legend()->setBackgroundVisible(false);
+    }
+    update();
 }
 
 void MainWidget::handleMarkerClicked() {
