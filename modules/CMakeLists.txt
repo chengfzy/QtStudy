@@ -9,8 +9,9 @@ list(APPEND DEPEND_LIBS ${PRJ_COMMON})
 
 # add other projects
 add_subdirectory(basic)
+add_subdirectory(chart)
+add_subdirectory(gl)
+add_subdirectory(web)
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     add_subdirectory(quick)
 endif()
-add_subdirectory(gl)
-add_subdirectory(web)
