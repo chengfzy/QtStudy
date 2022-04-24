@@ -16,7 +16,7 @@ Some Study Code about Qt using CMake
 # Chart
 1. Chart01_Basic \
     Basic chart example. \
-    Ref: Qt Example, legend markers
+    Ref: Qt Example, Legend Markers, Light Markers Point Selection Example.
 
 ### OpenGL
 1. Gl01_OpenGLWindow    \

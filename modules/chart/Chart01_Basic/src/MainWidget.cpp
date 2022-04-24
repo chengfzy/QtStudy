@@ -34,16 +34,34 @@ void MainWidget::addSeries() {
     // make some sine ware for data
     QList<QPointF> data;
     int offset = chart_->series().count();
-    for (size_t i = 0; i < 360; ++i) {
+    for (size_t i = 0; i < 360; i += 5) {
         float x = offset * 20 + i;
         data.append(QPointF(i, sin(qDegreesToRadians(x))));
     }
     s->append(data);
+
     chart_->addSeries(s);
 
     if (series_.size() == 1) {
-        // modify first series
+        // set line color
         s->setColor(Qt::red);
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 2, 0)
+        // set marker to orange circle
+        float imageSize{20};
+        QImage marker(imageSize, imageSize, QImage::Format_ARGB32);
+        marker.fill(QColor(0, 0, 0, 0));
+        QPainter painter;
+        painter.begin(&marker);
+        painter.setBrush(QColor(255, 127, 80));
+        QPen pen = painter.pen();
+        pen.setWidth(0);
+        painter.setPen(pen);
+        painter.drawEllipse(0, 0, imageSize * 0.9, imageSize * 0.9);
+        painter.end();
+        s->setLightMarker(marker);
+        s->setMarkerSize(10);
+#endif
 
         chart_->createDefaultAxes();
     }
