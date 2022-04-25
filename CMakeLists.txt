@@ -55,11 +55,18 @@ list(APPEND DEPEND_LIBS
 find_package(QT NAMES Qt6 Qt5 COMPONENTS Core)
 message(STATUS "Qt Version: ${QT_VERSION}")
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
-    find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Widgets Gui Qml Quick OpenGL OpenGLWidgets Network Charts REQUIRED)
-    list(APPEND DEPEND_LIBS Qt::Core Qt::Widgets Qt::Qml Qt::Quick Qt::OpenGL Qt::OpenGLWidgets Qt::Network Qt::Charts)
+    find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Widgets Gui Qml Quick OpenGL OpenGLWidgets Network Charts
+        PrintSupport
+        REQUIRED
+    )
+    list(APPEND DEPEND_LIBS Qt::Core Qt::Widgets Qt::Qml Qt::Quick Qt::OpenGL Qt::OpenGLWidgets Qt::Network Qt::Charts
+        Qt::PrintSupport
+    )
 else()
-    find_package(Qt5 COMPONENTS Core Widgets Gui Qml Quick OpenGL Network Charts REQUIRED)
-    list(APPEND DEPEND_LIBS Qt::Core Qt::Widgets Qt::Gui Qt::Qml Qt::Quick Qt::OpenGL Qt::Network Qt::Charts)
+    find_package(Qt5 COMPONENTS Core Widgets Gui Qml Quick OpenGL Network Charts PrintSupport REQUIRED)
+    list(APPEND DEPEND_LIBS Qt::Core Qt::Widgets Qt::Gui Qt::Qml Qt::Quick Qt::OpenGL Qt::Network Qt::Charts
+        Qt::PrintSupport
+    )
 endif()
 
 ###############################################################################
@@ -85,5 +92,12 @@ set(CMAKE_AUTORCC ON)   # create code from a resource files
 ###############################################################################
 # Project
 ###############################################################################
+# third party
+list(APPEND DEPEND_INCLUDES
+    ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/QCustomPlot/include
+)
+
+add_subdirectory(3rdparty)
+
 # add modules
 add_subdirectory(modules)
