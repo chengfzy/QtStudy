@@ -51,7 +51,7 @@ void MainWidget::addSeries() {
         // set line color
         s->setColor(Qt::red);
 
-#if QT_VERSION < QT_VERSION_CHECK(6, 2, 0)
+#if QT_VERSION >= QT_VERSION_CHECK(6, 2, 0)
         // set marker to orange circle
         float imageSize{20};
         QImage marker(imageSize, imageSize, QImage::Format_ARGB32);
@@ -69,6 +69,8 @@ void MainWidget::addSeries() {
 #endif
 
         chart_->createDefaultAxes();
+        chart_->axes(Qt::Horizontal).first()->setTitleText("Time");
+        chart_->axes(Qt::Vertical).first()->setTitleText("Data");
     }
 }
 
