@@ -28,7 +28,7 @@ void MainWindow::addSeries() {
         y1[i] = exp(-i / 150.f);
     }
 
-    // create graph and assign data
+    // graph 01
     auto graph = plot_->addGraph();
     QPen pen(Qt::blue);
     pen.setStyle(Qt::DashLine);
@@ -37,15 +37,21 @@ void MainWindow::addSeries() {
     graph->setBrush(QBrush(QColor(0, 0, 255, 20)));
     graph->setData(x, y0);
     graph->setName("Data 01");
-    // set data
+
+    // graph 01
     graph = plot_->addGraph();
     graph->setPen(QPen(Qt::red));
-    graph->setLineStyle(QCPGraph::LineStyle::lsLine);
-    graph->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssDisc, 3));
+    graph->setLineStyle(QCPGraph::LineStyle::lsNone);  // only scatter
+    graph->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssDisc, 5));
+    graph->setSelectable(QCP::stSingleData);  // set data selectable
+
+    graph->selectionDecorator()->setPen(QPen(Qt::magenta));
+    auto selectionScatterStyle = graph->selectionDecorator()->scatterStyle();
+    selectionScatterStyle.setSize(10);
+    graph->selectionDecorator()->setScatterStyle(selectionScatterStyle);
+
     graph->setData(x, y1);
     graph->setName("Data 02");
-    // set data selectable
-    graph->setSelectable(QCP::stSingleData);
     // print out selection data
     connect(graph, static_cast<void (QCPGraph::*)(const QCPDataSelection&)>(&QCPGraph::selectionChanged), this,
             [&](const QCPDataSelection& s) {
