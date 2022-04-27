@@ -18,6 +18,15 @@ Some Study Code about Qt using CMake
     Basic chart example. \
     Ref: Qt Example, Legend Markers Example, Light Markers Point Selection Example, Legend Example
 
+# CustomPlot
+Some Examples using [QCustomPlot](https://www.qcustomplot.com/)
+1. CustomPlot01_Basic   \
+    Basic example.  \
+    Ref: Official examples
+1. CustomPlot02_MultiAxis   \
+    Plot with multi axis.   \
+    Ref: Official examples
+
 ### OpenGL
 1. Gl01_OpenGLWindow    \
     Basic usage using QOpenGLWidget. \
