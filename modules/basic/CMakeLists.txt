@@ -1,3 +1,4 @@
 # basic Qt usage
 add_subdirectory(Basic01_HelloWorld)
 add_subdirectory(Basic02_CustomModeView)
+add_subdirectory(Basic03_ImageViewer)
