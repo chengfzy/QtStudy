@@ -7,7 +7,7 @@ class MainWindow : public QMainWindow {
     explicit MainWindow(QWidget* parent = nullptr);
 
   public slots:
-    void addSeries();
+    void setupPlot();
 
   private:
     QCustomPlot* plot_;
