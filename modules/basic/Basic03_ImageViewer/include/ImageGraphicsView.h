@@ -8,7 +8,7 @@ class ImageGraphicsView : public QGraphicsView {
 
     ~ImageGraphicsView() = default;
 
-  public:
+  public slots:
     void zoomIn();
     void zoomOut();
 
@@ -16,7 +16,10 @@ class ImageGraphicsView : public QGraphicsView {
     void wheelEvent(QWheelEvent* event) override;
     void mousePressEvent(QMouseEvent* event) override;
     void mouseMoveEvent(QMouseEvent* event) override;
+    void mouseReleaseEvent(QMouseEvent* event) override;
 
   private:
-    QPointF prePos_;  // previouse mouse pos
+    bool isMousePressed_ = false;  // indict mouse is pressed
+    QPointF centerPos_;            // center pos
+    QPoint prePos_;                // previouse mouse pos
 };
