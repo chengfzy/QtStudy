@@ -1,44 +1,33 @@
 #include "ImageGraphicsView.h"
-#include <QTimer>
+#include <QWheelEvent>
 
 #include <QDebug>
 
-using namespace std;
+void ImageGraphicsView::zoomIn() { scale(1.1, 1.1); }
 
-ImageGraphicsView::ImageGraphicsView(QWidget* parent) : QGraphicsView(parent) {
-    setContentsMargins(0, 0, 0, 0);
-    setMinimumSize(400, 300);
-    setAlignment(Qt::AlignHCenter);
+void ImageGraphicsView::zoomOut() { scale(0.9, 0.9); }
 
-    // // display timer
-    //  displayTimer_ = new QTimer(this);
-    //  timer
+void ImageGraphicsView::wheelEvent(QWheelEvent* event) {
+    auto preViewPos = event->position().toPoint();
+    auto preScenePos = mapToScene(preViewPos);
+    if (event->angleDelta().y() > 0) {
+        zoomIn();
+    } else {
+        zoomOut();
+    }
+    // remove scroll bar
+    setSceneRect(mapToScene(rect()).boundingRect());
 
-    // setInteractive(false);
-    // setMouseTracking(true);
+    auto scenePos = mapToScene(preViewPos);
+    auto deltaP = scenePos - preScenePos;
+    qDebug() << QString("deltaP = (%1, %2)").arg(deltaP.x()).arg(deltaP.y());
+    setSceneRect(sceneRect().x() - deltaP.x(), sceneRect().y() - deltaP.y(), sceneRect().width(), sceneRect().height());
 }
 
-void ImageGraphicsView::setImage(const QImage& image) {
-    image_ = image;
+void ImageGraphicsView::mousePressEvent(QMouseEvent* event) { prePos_ = event->pos(); }
 
-    // set ratio
-    qDebug() << QString("image size: %1x%2").arg(image_.width()).arg(image_.height());
-    qDebug() << QString("view size: %1x%2").arg(width()).arg(height());
-    // ratio_ = min(static_cast<float>(width()) / image_.width(), static_cast<float>(height()) / image_.height());
-    ratio_ = static_cast<float>(width()) / image_.width();
-    resize(width(), image_.height() * ratio_);
-    auto h = image_.height() * ratio_;
-    qDebug() << QString("view size: %1x%2, ratio = %3, h = %4").arg(width()).arg(height()).arg(ratio_).arg(h);
-
-    updateGeometry();
-    viewport()->update();
-}
-
-void ImageGraphicsView::paintEvent(QPaintEvent* event) {
-    QPainter painter(viewport());
-
-    painter.setWorldTransform(transform_);
-    painter.drawImage(QRect(0, 0, viewport()->width(), viewport()->height()), image_,
-                      QRect(0, 0, image_.width(), image_.height()));
-    painter.setWorldMatrixEnabled(false);
+void ImageGraphicsView::mouseMoveEvent(QMouseEvent* event) {
+    auto deltaP = event->pos() - prePos_;
+    prePos_ = event->pos();
+    setSceneRect(sceneRect().x() - deltaP.x(), sceneRect().y() - deltaP.y(), sceneRect().width(), sceneRect().height());
 }

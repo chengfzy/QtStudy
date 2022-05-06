@@ -1,24 +1,22 @@
 #pragma once
 #include <QGraphicsView>
 
-class QGraphicsView;
-
 class ImageGraphicsView : public QGraphicsView {
     Q_OBJECT
   public:
-    explicit ImageGraphicsView(QWidget* parent = nullptr);
+    using QGraphicsView::QGraphicsView;
+
     ~ImageGraphicsView() = default;
 
   public:
-    void setImage(const QImage& image);
+    void zoomIn();
+    void zoomOut();
 
   protected:
-    void paintEvent(QPaintEvent* event) override;
+    void wheelEvent(QWheelEvent* event) override;
+    void mousePressEvent(QMouseEvent* event) override;
+    void mouseMoveEvent(QMouseEvent* event) override;
 
   private:
-    QImage image_;  // image
-    QTransform transform_;
-    float ratio_ = 1.0;  // ratio
-
-    // QTimer* displayTimer_ = nullptr;  // timer for display info
+    QPointF prePos_;  // previouse mouse pos
 };
