@@ -71,7 +71,7 @@ void ImageGraphicsView::paintEvent(QPaintEvent* event) {
 
     // show current position and RGB
     if (currentPos_.x() >= 0 && currentPos_.y() >= 0 && currentPos_.x() < image_.width() &&
-        currentPos_ < image_.height()) {
+        currentPos_.y() < image_.height()) {
         auto color = image_.pixel(currentPos_);
         QString msg = tr("<font color='black'>(x=%1, y=%2) </font>").arg(currentPos_.x()).arg(currentPos_.y());
         if (image_.isGrayscale()) {
