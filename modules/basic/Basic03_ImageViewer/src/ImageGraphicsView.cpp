@@ -5,6 +5,10 @@
 
 using namespace std;
 
+ImageGraphicsView::ImageGraphicsView(QGraphicsScene* scene, QWidget* parent) : QGraphicsView(scene, parent) {
+    setMouseTracking(true);
+}
+
 void ImageGraphicsView::setImage(const QImage& image) {
     image_ = image;
 
@@ -56,6 +60,7 @@ void ImageGraphicsView::move() {
 }
 
 void ImageGraphicsView::paintEvent(QPaintEvent* event) {
+    QGraphicsView::paintEvent(event);
     qDebug() << "paint event";
 
     QPainter painter(viewport());
@@ -64,7 +69,21 @@ void ImageGraphicsView::paintEvent(QPaintEvent* event) {
                       QRect(0, 0, image_.width(), image_.height()));
     painter.setWorldMatrixEnabled(false);
 
-    QGraphicsView::paintEvent(event);
+    // show current position and RGB
+    if (currentPos_.x() >= 0 && currentPos_.y() >= 0 && currentPos_.x() < image_.width() &&
+        currentPos_ < image_.height()) {
+        auto color = image_.pixel(currentPos_);
+        QString msg = tr("<font color='black'>(x=%1, y=%2) </font>").arg(currentPos_.x()).arg(currentPos_.y());
+        if (image_.isGrayscale()) {
+            msg += tr("<font color='gray'>L:%1</font>").arg(qRed(color));
+        } else {
+            msg += tr("<font color='red'>R:%1 </font><font color='green'>G:%2 </font><font color='blue'>B:%3</font>")
+                       .arg(qRed(color))
+                       .arg(qGreen(color))
+                       .arg(qBlue(color));
+        }
+        emit newInfo(msg);
+    }
 }
 
 void ImageGraphicsView::resizeEvent(QResizeEvent* event) {
@@ -74,6 +93,7 @@ void ImageGraphicsView::resizeEvent(QResizeEvent* event) {
 
 void ImageGraphicsView::wheelEvent(QWheelEvent* event) {
     QGraphicsView::wheelEvent(event);
+
     auto preViewPos = event->position();
     auto preScenePos = transform_.inverted().map(preViewPos);
     if (event->angleDelta().y() > 0) {
@@ -105,8 +125,10 @@ void ImageGraphicsView::mouseMoveEvent(QMouseEvent* event) {
         prePos_ = event->pos();
         transform_.translate(deltaP.x(), deltaP.y());
         qDebug() << "mouse move, transform = " << transform_;
-        viewport()->update();
     }
+
+    currentPos_ = transform_.inverted().map(event->pos());
+    viewport()->update();
 }
 
 void ImageGraphicsView::mouseReleaseEvent(QMouseEvent* event) {

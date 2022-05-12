@@ -8,10 +8,12 @@ class ImageWidget : public QWidget {
   public:
     explicit ImageWidget(QWidget* parent = nullptr);
 
+  signals:
+    void newInfo(const QString& msg);
+
   public:
     void setImage(const QImage& image);
 
-  protected:
   private:
     void setupUI();
 

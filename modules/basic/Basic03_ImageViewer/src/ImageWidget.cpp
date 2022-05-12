@@ -28,4 +28,7 @@ void ImageWidget::setupUI() {
     mainLayout->addWidget(toolBar);
     mainLayout->addWidget(view_);
     setLayout(mainLayout);
+
+    // connection
+    connect(view_, &ImageGraphicsView::newInfo, this, [&](const QString& msg) { emit newInfo(msg); });
 }
