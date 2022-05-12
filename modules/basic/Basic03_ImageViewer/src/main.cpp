@@ -5,15 +5,13 @@
 int main(int argc, char* argv[]) {
     QApplication app(argc, argv);
 
-    QImage image("./data/img.jpg");
-
-    // ImageGraphicsView view;
-    // view.setImage(image);
-    // view.show();
+    // QImage image("./data/img.jpg");
+    QImage image("./data/img1.png");
 
     ImageWidget imageWidget;
-    imageWidget.setImage(image);
+    imageWidget.setMinimumSize(400, 500);
     imageWidget.show();
+    imageWidget.setImage(image);
 
     return app.exec();
 }

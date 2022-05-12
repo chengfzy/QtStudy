@@ -16,8 +16,5 @@ class ImageWidget : public QWidget {
     void setupUI();
 
   private:
-    QImage image_;                              // image
-    ImageGraphicsView* view_ = nullptr;         // graphic view
-    QGraphicsPixmapItem* imageItem_ = nullptr;  // image graphics item
-    double scale_ = 1.0;
+    ImageGraphicsView* view_ = nullptr;  // graphic view
 };
