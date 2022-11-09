@@ -1,5 +1,4 @@
 # find Qt folder and add it to cmake search path, cannot use function() due to CMAKE_PREFIX_PATH will be a local variable
-# find Qt folder and add it to cmake search path, cannot use function() due to CMAKE_PREFIX_PATH will be a local variable
 macro(FindAddQtPath QtPaths)
     # check windows arch and VC version
     if(WIN32)
