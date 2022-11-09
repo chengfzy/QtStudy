@@ -37,10 +37,8 @@ class MainWidget : public QOpenGLWidget, protected QOpenGLFunctions {
     void setPerspectiveProjectionMatrix();
     void setOrthoProjectionMatrix();
     void setViewMatrix();
-    void initShaders();
-    void paintGLHelperForFontRendering();
-    // void			drawFontGeometry(GLfloat pos_x, GLfloat pos_y, const QString& text, GLfloat
-    // scale_factor, bool boldAndItalic);
+
+    void setText(float x, float y, const QString& text, float scale);
 
   protected:
     void initializeGL() override;
@@ -58,7 +56,6 @@ class MainWidget : public QOpenGLWidget, protected QOpenGLFunctions {
     QElapsedTimer frameTime;
     QVector2D screenDimension;
 
-    QOpenGLShaderProgram programFont;
     float fps;
     FontRender* fontRender_;
     QElapsedTimer frameTimeForFontLoad;

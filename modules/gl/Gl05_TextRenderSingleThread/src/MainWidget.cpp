@@ -62,22 +62,20 @@ void MainWidget::setViewMatrix() {
     viewMatrix.lookAt(camSpec.cameraPos, camSpec.cameraPos + camSpec.cameraFront, camSpec.cameraUp);
 }
 
-void MainWidget::initShaders() {
-    // Font shaders
-    if (!programFont.addShaderFromSourceFile(QOpenGLShader::Vertex, ":/shader/text.vert")) close();
-    if (!programFont.addShaderFromSourceFile(QOpenGLShader::Fragment, ":/shader/text.frag")) close();
-    if (!programFont.link()) close();
+void MainWidget::setText(float x, float y, const QString& text, float scale) {
+    fontRender_->setText(x, y, text, scale);
 }
 
 void MainWidget::initializeGL() {
     initializeOpenGLFunctions();
     glClearColor(0, 0, 0, 0.5f);
     glEnable(GL_DEPTH_TEST);
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     setOrthoProjectionMatrix();
     setPerspectiveProjectionMatrix();
     setViewMatrix();
-    initShaders();
     frameTime.start();
     frameCount = 0;
     frameTimeForFontLoad.start();
@@ -85,21 +83,12 @@ void MainWidget::initializeGL() {
     // doneCurrent();
     fontRender_ = new FontRender();
     fontRender_->init();
+
+    QString stringToDisplay = QString::fromUtf8("Qt Font Load App With Unicode Ex: 成都，你好!");
+    fontRender_->setText(10, 10, stringToDisplay, 0.75);
 }
 
 void MainWidget::resizeGL(int w, int h) {}
-
-void MainWidget::paintGLHelperForFontRendering() {
-    QVector4D fontColor(1.0f, 1.0f, 0.0f, 1.0f);
-    programFont.bind();
-    modelMatrix.setToIdentity();
-    programFont.setUniformValue("mvp_matrix", getOrthoProjectionMatrix() * modelMatrix);
-    programFont.setUniformValue("textColor", fontColor);
-    programFont.setUniformValue("text", 0);
-    QString stringToDisplay = QString::fromUtf8("Qt Font Load App With Unicode Ex: 成都，你好!");
-    fontRender_->drawFontGeometry(&programFont, 10.0f, 10.0f, stringToDisplay, 0.75f);
-    programFont.release();
-}
 
 void MainWidget::paintGL() {
 #ifdef FLIP_VIEW
@@ -115,12 +104,11 @@ void MainWidget::paintGL() {
         qDebug() << "Total load Time for First painGL call" << loadTime << "\n";
     }
 
-    paintGLHelperForFontRendering();
-    // QVector4D fontColor(1.0f, 1.0f, 0.0f, 1.0f);
-    // modelMatrix.setToIdentity();
-    // QString stringToDisplay = QString::fromUtf8("Qt Font Load App With Unicode Ex: 成都，你好!");
-    // fontRender_->drawFontGeometry(10.0f, 10.0f, stringToDisplay, 0.75f, getOrthoProjectionMatrix() * modelMatrix,
-    //                               fontColor);
+    QVector4D fontColor(1.0f, 1.0f, 0.0f, 1.0f);
+    modelMatrix.setToIdentity();
+    QMatrix4x4 pvmMat = getOrthoProjectionMatrix() * modelMatrix;
+    // fontRender_->drawFontGeometry(10.0f, 10.0f, stringToDisplay, 0.75f, pvmMat, fontColor);
+    fontRender_->render(pvmMat, fontColor);
 
     ++frameCount;
     if (frameTime.elapsed() >= 1000) {
