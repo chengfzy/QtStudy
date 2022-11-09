@@ -20,8 +20,8 @@ void FontProvider::initFontGeometry() {
     if (FT_Init_FreeType(&ft)) qDebug() << "ERROR::FREETYPE: Could not init FreeType Library\n";
 
     // Load font as face
-    // std::string fontFile{"./modules/gl/Gl04_TextRender/res/font/AntonioRegular.ttf"};
-    std::string fontFile{"./modules/gl/Gl04_TextRender/res/font/ReadboldV2000.ttf"};
+    // std::string fontFile{"./modules/gl/Gl04_TextRenderMultiThread/res/font/AntonioRegular.ttf"};
+    std::string fontFile{"./modules/gl/Gl04_TextRenderMultiThread/res/font/ReadboldV2000.ttf"};
     FT_Face face;
     if (FT_New_Face(ft, fontFile.c_str(), 0, &face)) {
         qDebug() << "ERROR::FREETYPE: Failed to load font\n";
