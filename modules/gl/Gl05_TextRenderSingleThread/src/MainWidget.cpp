@@ -2,6 +2,11 @@
 
 //#define FLIP_VIEW
 
+constexpr unsigned int SCR_WIDTH_OFFSET = 125;
+constexpr unsigned int SCR_HEIGHT_OFFSET = 230;
+constexpr unsigned int SCR_WIDTH = 1140;
+constexpr unsigned int SCR_HEIGHT = 912;
+
 MainWidget::MainWidget(QWidget* parent) : QOpenGLWidget(parent) {
     setAttribute(Qt::WA_TranslucentBackground);
     setAttribute(Qt::WA_DeleteOnClose);
@@ -23,12 +28,7 @@ MainWidget::MainWidget(QWidget* parent) : QOpenGLWidget(parent) {
     finishedLoadingBoldChars = false;
 }
 
-MainWidget::~MainWidget() {
-    if (fpObj->isRunning()) {
-        fpObj->quit();
-        delete fpObj;
-    }
-}
+MainWidget::~MainWidget() {}
 
 QMatrix4x4& MainWidget::getOrthoProjectionMatrix() { return orthoProjection; }
 
@@ -71,8 +71,9 @@ void MainWidget::initShaders() {
 
 void MainWidget::initializeGL() {
     initializeOpenGLFunctions();
-
     glClearColor(0, 0, 0, 0.5f);
+    glEnable(GL_DEPTH_TEST);
+
     setOrthoProjectionMatrix();
     setPerspectiveProjectionMatrix();
     setViewMatrix();
@@ -81,41 +82,12 @@ void MainWidget::initializeGL() {
     frameCount = 0;
     frameTimeForFontLoad.start();
 
-    QOpenGLContext* current = context();
-    doneCurrent();
-    fpObj = new FontProvider();
-
-    // the background thread's context is shared from current
-    QOpenGLContext* shared = fpObj->context;
-    shared->setFormat(current->format());
-    shared->setShareContext(current);
-    shared->create();
-
-    // must move the shared context to the background thread
-    shared->moveToThread(fpObj);
-
-    // setup the background thread's surface
-    // must be created here in the main thread
-    QOffscreenSurface* surface = fpObj->surface;
-    surface->setFormat(shared->format());
-    surface->create();
-
-    // worker signal
-    connect(fpObj, SIGNAL(started()), fpObj, SLOT(initializeFontProvider()));
-    connect(fpObj, SIGNAL(finished()), this, SLOT(OnFinishedChildThread()));
-
-    // must move the thread to itself
-    fpObj->moveToThread(fpObj);
-
-    // the worker can finally start
-    fpObj->start();
-
-    glEnable(GL_DEPTH_TEST);
+    // doneCurrent();
+    fontRender_ = new FontRender();
+    fontRender_->init();
 }
 
 void MainWidget::resizeGL(int w, int h) {}
-
-void MainWidget::OnFinishedChildThread() { finishedLoadingBoldChars = true; }
 
 void MainWidget::paintGLHelperForFontRendering() {
     QVector4D fontColor(1.0f, 1.0f, 0.0f, 1.0f);
@@ -125,11 +97,10 @@ void MainWidget::paintGLHelperForFontRendering() {
     programFont.setUniformValue("textColor", fontColor);
     programFont.setUniformValue("text", 0);
     QString stringToDisplay = QString::fromUtf8("Qt Font Load App With Unicode Ex: 成都，你好!");
-    fpObj->drawFontGeometry(&programFont, 10.0f, 10.0f, stringToDisplay, 0.75f);
+    fontRender_->drawFontGeometry(&programFont, 10.0f, 10.0f, stringToDisplay, 0.75f);
     programFont.release();
 }
 
-//#if 0
 void MainWidget::paintGL() {
 #ifdef FLIP_VIEW
     glViewport(-SCR_WIDTH_OFFSET, -SCR_HEIGHT_OFFSET, (GLsizei)SCR_WIDTH, (GLsizei)SCR_HEIGHT);
@@ -144,7 +115,12 @@ void MainWidget::paintGL() {
         qDebug() << "Total load Time for First painGL call" << loadTime << "\n";
     }
 
-    if (finishedLoadingBoldChars) paintGLHelperForFontRendering();
+    paintGLHelperForFontRendering();
+    // QVector4D fontColor(1.0f, 1.0f, 0.0f, 1.0f);
+    // modelMatrix.setToIdentity();
+    // QString stringToDisplay = QString::fromUtf8("Qt Font Load App With Unicode Ex: 成都，你好!");
+    // fontRender_->drawFontGeometry(10.0f, 10.0f, stringToDisplay, 0.75f, getOrthoProjectionMatrix() * modelMatrix,
+    //                               fontColor);
 
     ++frameCount;
     if (frameTime.elapsed() >= 1000) {
@@ -153,4 +129,3 @@ void MainWidget::paintGL() {
     }
     update();
 }
-//#endif

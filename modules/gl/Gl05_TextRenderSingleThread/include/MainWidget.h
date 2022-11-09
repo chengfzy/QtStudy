@@ -9,13 +9,7 @@
 #include <QtCore>
 #include <iomanip>
 #include <sstream>
-#include "FontProvider.h"
-
-const unsigned int SCR_WIDTH_OFFSET = 125;
-const unsigned int SCR_HEIGHT_OFFSET = 230;
-
-const unsigned int SCR_WIDTH = 1140;
-const unsigned int SCR_HEIGHT = 912;
+#include "FontRender.h"
 
 typedef struct {
     QVector3D cameraPos;
@@ -32,9 +26,6 @@ typedef struct {
 
 class MainWidget : public QOpenGLWidget, protected QOpenGLFunctions {
     Q_OBJECT
-
-  public slots:
-    void OnFinishedChildThread();
 
   public:
     MainWidget(QWidget* parent = 0);
@@ -68,12 +59,8 @@ class MainWidget : public QOpenGLWidget, protected QOpenGLFunctions {
     QVector2D screenDimension;
 
     QOpenGLShaderProgram programFont;
-
     float fps;
-
-    QThread threadCons;
-
-    FontProvider* fpObj;
+    FontRender* fontRender_;
     QElapsedTimer frameTimeForFontLoad;
     bool checkFirstFrameTimeElapsed;
     bool finishedLoadingBoldChars;
