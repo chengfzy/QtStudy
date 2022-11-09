@@ -2,4 +2,5 @@
 add_subdirectory(Gl01_OpenGLWindow)
 add_subdirectory(Gl02_OpenGL3DRendering)
 add_subdirectory(Gl03_2DPainting)
-add_subdirectory(Gl04_TextRender)
+add_subdirectory(Gl04_TextRenderMultiThread)
+add_subdirectory(Gl05_TextRenderSingleThread)

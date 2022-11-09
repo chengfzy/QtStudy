@@ -37,9 +37,11 @@ Some Examples using [QCustomPlot](https://www.qcustomplot.com/)
 1. Gl03_2DPainting   \
     2D painting example, draw 2D with QWidget and QOpenGLWidget. \
     Ref: Qt OpenGL Example, 2D Painting Example
-1. Gl04_TextRender  \
+1. Gl04_TextRenderMultiThread  \
     Text render example. \
     Ref: https://github.com/arunrvk/Qt-OpenGL-Fonts-with-Freetype-Library
+1. Gl05_TextRenderSingleThread  \
+    Change Gl04_TextRenderMultiThread to single thread
 
 ### Web
 1. Web01_TcpServer   \

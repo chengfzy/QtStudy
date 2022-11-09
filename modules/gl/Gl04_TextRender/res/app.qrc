@@ -1,9 +1,0 @@
-<!DOCTYPE RCC><RCC version="1.0">
-    <qresource prefix="/shader">
-        <file alias="text.vert">./shader/text.vert</file>
-        <file alias="text.frag">./shader/text.frag</file>
-    </qresource>
-    <qresource prefix="/font">
-        <file alias="AntonioRegular">./font/AntonioRegular.ttf</file>
-    </qresource>
-</RCC>
