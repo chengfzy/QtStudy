@@ -31,6 +31,8 @@ Some Examples using [QCustomPlot](https://www.qcustomplot.com/)
 Some examples using [Advanced Docking System](https://github.com/githubuser0xFFFF/Qt-Advanced-Docking-System)
 1. ads01_Basic \
     Basic example, ref: [simple example](https://github.com/githubuser0xFFFF/Qt-Advanced-Docking-System/tree/master/examples/simple)
+1. ads02_DockInDockWidget \
+    Dock in dock, ref: [dock in dock example](https://github.com/githubuser0xFFFF/Qt-Advanced-Docking-System/tree/master/examples/dockindock)
 
 ### OpenGL
 1. Gl01_OpenGLWindow    \
