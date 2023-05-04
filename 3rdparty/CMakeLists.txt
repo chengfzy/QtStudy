@@ -1,1 +1,2 @@
 add_subdirectory(QCustomPlot)
+add_subdirectory(ads)

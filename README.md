@@ -27,6 +27,11 @@ Some Examples using [QCustomPlot](https://www.qcustomplot.com/)
     Plot with multi axis.   \
     Ref: Official examples
 
+# ads
+Some examples using [Advanced Docking System](https://github.com/githubuser0xFFFF/Qt-Advanced-Docking-System)
+1. ads01_Basic \
+    Basic example, ref: [simple example](https://github.com/githubuser0xFFFF/Qt-Advanced-Docking-System/tree/master/examples/simple)
+
 ### OpenGL
 1. Gl01_OpenGLWindow    \
     Basic usage using QOpenGLWidget. \

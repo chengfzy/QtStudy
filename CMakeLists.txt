@@ -95,6 +95,7 @@ set(CMAKE_AUTORCC ON)   # create code from a resource files
 # third party
 list(APPEND DEPEND_INCLUDES
     ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/QCustomPlot/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/ads/include
 )
 
 add_subdirectory(3rdparty)
