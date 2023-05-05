@@ -33,6 +33,8 @@ Some examples using [Advanced Docking System](https://github.com/githubuser0xFFF
     Basic example, ref: [simple example](https://github.com/githubuser0xFFFF/Qt-Advanced-Docking-System/tree/master/examples/simple)
 1. ads02_DockInDockWidget \
     Dock in dock, ref: [dock in dock example](https://github.com/githubuser0xFFFF/Qt-Advanced-Docking-System/tree/master/examples/dockindock)
+1. ads03_DockInWidget  \
+    与ads01_Basic类似, 不同的地方在于使用`QWidget`而非`QMainWindow`作为主窗口, 需要注意最后的layout代码, 不然会出现显示不全的情况
 
 ### OpenGL
 1. Gl01_OpenGLWindow    \
